@@ -1,16 +1,16 @@
 import sys
 from random import randint
 
-from PyQt5 import uic
+from UI import Ui_MainWindow
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.circle = [0, 0, 0, 0]
-        uic.loadUi('UI.ui', self)
         self.pushButton.clicked.connect(self.run)
 
     def run(self):
@@ -30,7 +30,7 @@ class MyWidget(QMainWindow):
 
     def draw_flag(self, qp):
         # Задаем кисть
-        qp.setBrush(QColor("yellow"))
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         # Рисуем прямоугольник заданной кистью
         qp.drawEllipse(*self.circle)
 
